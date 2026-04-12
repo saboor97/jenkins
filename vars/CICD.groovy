@@ -20,7 +20,7 @@ def call() {
 
             stage('Checkout') {
                 steps {
-                    git url: 'https://github.com/saboor97/github-practice.git', branch: 'main'
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/saboor97/github-practice.git']])
                 }
             }
 
