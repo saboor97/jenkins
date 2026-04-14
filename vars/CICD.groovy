@@ -23,16 +23,17 @@ def call() {
                     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/saboor97/github-practice.git']])
                 }
             }
-        stage('SSH Command') {
-            steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'ssh-creds',
-                    usernameVariable: 'SSH_USER',
-                    passwordVariable: 'SSH_PASS'
-                )]) {
-                    sh '''
-                    sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no -p 55914 $SSH_USER@116.202.196.159 "hostname -I"
-                    '''
+            stage('SSH Command') {
+                steps {
+                    withCredentials([usernamePassword(
+                        credentialsId: 'ssh-creds',
+                        usernameVariable: 'SSH_USER',
+                        passwordVariable: 'SSH_PASS'
+                    )]) {
+                        sh '''
+                        sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no -p 55914 $SSH_USER@116.202.196.159 "hostname -I"
+                        '''
+                    }
                 }
             }
             stage('Build Docker Image') {
