@@ -25,6 +25,9 @@ def call() {
             }
             stage('SSH Command') {
                 steps {
+                        sh '''
+                        hostname -I
+                    '''
                     withCredentials([usernamePassword(
                         credentialsId: 'ssh-creds',
                         usernameVariable: 'SSH_USER',
